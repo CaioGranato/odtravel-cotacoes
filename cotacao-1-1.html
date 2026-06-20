@@ -292,6 +292,22 @@
       font-weight: 900;
     }
 
+    .pix-discount-line {
+      margin-bottom: 8px;
+      font-size: 11px;
+      color: #2a8344;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .pix-discount-line strong {
+      display: block;
+      margin-top: 2px;
+      color: #2a8344;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
     .summary { padding: 13px 20px 17px; }
 
     .sum-row {
@@ -373,6 +389,7 @@
       .room-name { font-size: 12.5px; }
       .meal, .availability { font-size: 9.5px; }
       .room-price strong { font-size: 15px; }
+      .pix-discount-line strong { font-size: 12px; }
       .sum-row { font-size: 12px; padding: 5px 0; }
       .total .value { font-size: 18px; }
       .footer-note { margin-top: 10px; padding: 10px; font-size: 9px; }
@@ -515,7 +532,10 @@
               <div class="availability" id="room2Avail">Restam apenas 3 quartos</div>
             </div>
           </div>
-          <div class="room-price">Valor total<strong id="roomTotalPrice">R$ 9.343,07</strong></div>
+          <div class="room-price">
+            <div class="pix-discount-line" id="pixDiscountLine">Desconto no PIX ou Cartão Azul:<strong id="pixDiscountValue">R$ 0,00</strong></div>
+            <div class="total-line">Valor total<strong id="roomTotalPrice">R$ 9.343,07</strong></div>
+          </div>
         </div>
       </div>
 
@@ -652,6 +672,14 @@
             <label for="f-roomTotalPrice">Valor total dos quartos</label>
             <input type="text" id="f-roomTotalPrice" data-target="roomTotalPrice" value="R$ 9.343,07" />
           </div>
+          <div class="field">
+            <label for="f-pixDiscountLine">Texto - Desconto PIX/Cartão Azul</label>
+            <input type="text" id="f-pixDiscountLine" data-target="pixDiscountLine" data-type="text-prefix" value="Desconto no PIX ou Cartão Azul:" />
+          </div>
+          <div class="field">
+            <label for="f-pixDiscountValue">Valor - Desconto PIX/Cartão Azul</label>
+            <input type="text" id="f-pixDiscountValue" data-target="pixDiscountValue" value="R$ 0,00" />
+          </div>
         </div>
       </fieldset>
 
@@ -705,6 +733,16 @@
 
         if (field.getAttribute('data-type') === 'stars') {
           target.textContent = '★'.repeat(Number(field.value) || 0);
+          return;
+        }
+
+        if (field.getAttribute('data-type') === 'text-prefix') {
+          var firstNode = target.firstChild;
+          if (firstNode && firstNode.nodeType === Node.TEXT_NODE) {
+            firstNode.nodeValue = field.value;
+          } else {
+            target.insertBefore(document.createTextNode(field.value), firstNode || null);
+          }
           return;
         }
 
