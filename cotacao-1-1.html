@@ -56,12 +56,23 @@
     }
 
     .canvas {
-      width: min(94vmin, 94vh, 900px);
+      width: min(92vmin, calc(100vh - 30px), 900px);
       aspect-ratio: 1 / 1;
       background: #ffffff;
       padding: 26px;
       position: relative;
       overflow: hidden;
+    }
+
+    @supports (height: 100dvh) {
+      .canvas {
+        width: min(92vmin, calc(100dvh - 30px), 900px);
+      }
+      @media (max-width: 760px) {
+        .canvas {
+          width: min(94vmin, calc(100dvh - 26px), 900px);
+        }
+      }
     }
 
     .topbar {
@@ -179,7 +190,7 @@
     .price-mini strong {
       display: block;
       margin-top: 3px;
-      color: var(--blue);
+      color: var(--purple-dark);
       font-size: 22px;
       letter-spacing: 0;
       text-transform: none;
@@ -347,7 +358,7 @@
     }
 
     @media (max-width: 760px) {
-      .canvas { width: min(96vmin, 900px); padding: 18px; }
+      .canvas { width: min(94vmin, calc(100vh - 26px), 900px); padding: 18px; }
       .validity { display: none; }
       .hotel-card { margin-top: 12px; }
       .hotel-head { padding: 14px 15px 12px; gap: 12px; }
