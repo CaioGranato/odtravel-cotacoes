@@ -25,19 +25,38 @@
 
     body {
       margin: 0;
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 28px;
       background: #ececf1;
       font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
-      padding: 26px 0 60px;
+      overflow: hidden;
+    }
+
+    .canvas-wrap {
+      flex: 0 0 auto;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 16px 0 10px;
+      background: #ececf1;
+    }
+
+    .form-scroll {
+      flex: 1 1 auto;
+      width: 100%;
+      min-height: 0;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 0 40px;
     }
 
     .canvas {
-      width: min(96vmin, 900px);
+      width: min(94vmin, 94vh, 900px);
       aspect-ratio: 1 / 1;
       background: #ffffff;
       padding: 26px;
@@ -433,6 +452,7 @@
   </style>
 </head>
 <body>
+  <div class="canvas-wrap">
   <main class="canvas" aria-label="Cotação ODTravel">
     <header class="topbar">
       <div class="brand">
@@ -510,7 +530,9 @@
       <span class="cta" id="ctaText">Solicitar reserva</span>
     </div>
   </main>
+  </div>
 
+  <div class="form-scroll">
   <section class="edit-panel" aria-label="Formulário de preenchimento da cotação">
     <h2>Preencher cotação</h2>
     <p class="edit-sub">Altere os campos abaixo para atualizar a tela acima em tempo real.</p>
@@ -659,6 +681,7 @@
       </fieldset>
     </form>
   </section>
+  </div>
 
   <script>
     (function () {
